@@ -1,17 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import ContactForm from "./components/ContactForm";
+
+import { useEffect, useRef } from "react";
+import { getUserData } from "./utils/userTracker";
+import { sendVisitData } from "./services/api";
 
 function App() {
-  const [count, setCount] = useState(0)
+   const hasRun = useRef(false); 
 
+  useEffect(() => {
+    if (hasRun.current) return; 
+
+    hasRun.current = true;
+
+    async function trackUser() {
+      const data = getUserData();
+      await sendVisitData(data);
+      console.log("Data sent:", data);
+    }
+
+    trackUser();
+  }, []);
+
+  
    return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-5xl font-bold text-green-600">
-        Tailwind v4 Working 🚀
-      </h1>
+      <div>
+       <ContactForm />
+
     </div>
   );
 }
