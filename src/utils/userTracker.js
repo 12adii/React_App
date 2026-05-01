@@ -15,9 +15,9 @@ export function getUserData() {
   return {
     userId: getUserId(),
     timestamp: new Date().toISOString(),
-    deviceType: /Mobi|Android/i.test(navigator.userAgent)
-      ? "Mobile"
-      : "Desktop",
+    //deviceType: /Mobi|Android/i.test(navigator.userAgent)
+    //  ? "Mobile"
+     /// : "Desktop",
     screenSize: `${window.innerWidth}x${window.innerHeight}`,
     webBrowser: navigator.userAgent,
     url: window.location.href,
